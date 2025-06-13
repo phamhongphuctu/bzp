@@ -29,11 +29,19 @@ body {
   min-width: 320px;
   min-height: 100vh;
 }
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
 }
+
+body {
+  background-color: #ffffff; /* hoặc bg anh muốn */
+  font-family: system-ui, sans-serif;
+}
+
+
+
 
 button {
   border-radius: 8px;

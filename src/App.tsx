@@ -1,35 +1,51 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { BrowserRouter as Router, Routes, Route, Link, useLocation } from "react-router-dom";
+import { Home, ShoppingCart, Wallet, Gift, User } from "lucide-react";
+import HomePage from "./routes/HomePage.tsx";
+import MarketPage from "./routes/MarketPage.tsx";
+import WalletPage from "./routes/WalletPage.tsx";
+import EarnPage from "./routes/EarnPage.tsx";
+import ProfilePage from "./routes/ProfilePage.tsx";
 
-function App() {
-  const [count, setCount] = useState(0)
+function BottomNav() {
+  const location = useLocation();
+  const path = location.pathname;
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <nav className="fixed bottom-0 left-0 right-0 bg-black text-white flex justify-around py-2 border-t border-gray-800 z-50">
+      <Link to="/" className="flex flex-col items-center text-xs" style={{ color: path === "/" ? "#FFD700" : "white" }}>
+        <Home size={20} /> Casino
+      </Link>
+      <Link to="/market" className="flex flex-col items-center text-xs" style={{ color: path === "/market" ? "#FFD700" : "white" }}>
+        <ShoppingCart size={20} /> Chợ
+      </Link>
+      <Link to="/wallet" className="flex flex-col items-center text-xs" style={{ color: path === "/wallet" ? "#FFD700" : "white" }}>
+        <Wallet size={20} /> Ví
+      </Link>
+      <Link to="/earn" className="flex flex-col items-center text-xs" style={{ color: path === "/earn" ? "#FFD700" : "white" }}>
+        <Gift size={20} /> Kiếm tiền
+      </Link>
+      <Link to="/profile" className="flex flex-col items-center text-xs" style={{ color: path === "/profile" ? "#FFD700" : "white" }}>
+        <User size={20} /> Hồ sơ
+      </Link>
+    </nav>
+  );
 }
 
-export default App
+function App() {
+  return (
+    <Router>
+      <div className="min-h-screen flex flex-col bg-white">
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/market" element={<MarketPage />} />
+          <Route path="/wallet" element={<WalletPage />} />
+          <Route path="/earn" element={<EarnPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
+        </Routes>
+        <BottomNav />
+      </div>
+    </Router>
+  );
+}
+
+export default App;
